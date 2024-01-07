@@ -2,26 +2,35 @@
   "name": "electron-next-starter-kit",
   "version": "0.1.0",
   "private": true,
+  "main": "electron-dist/main.js",
+  "author": "Francisco Costa",
+  "description": "Electron + NextJS example project",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "npm run build:tsc && concurrently -n \"NEXT,ELECTRON\" -c \"yellow,blue\" --kill-others \"next dev\" \"electron .\"",
+    "build": "npm run build:tsc && next build && electron-builder",
+    "build:tsc": "tsc main/*.ts -outDir electron-dist/",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "electron-serve": "^1.2.0",
+    "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.0.4"
+    "react-dom": "^18"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@reativ/eslint-config": "^1.1.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
+    "concurrently": "^8.2.2",
+    "electron": "^28.1.0",
+    "electron-builder": "^24.9.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.4"
+    "typescript": "^5"
   }
 }
